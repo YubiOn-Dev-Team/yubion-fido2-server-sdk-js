@@ -1,5 +1,7 @@
 # yubion-fido2-server-sdk-js
 
+[English](README.md) | [Japanese](README.ja.md)
+
 ## yubion-fido2-server-sdk-jsとは
 yubion-fido2-server-sdk-js は、YubiOn FIDO2Server Service（以下、YubiOn FSS）をnode.jsから利用するためのSDKライブラリです。node.jsを用いたサーバーアプリケーションからFIDO2認証（Passkey）を簡単に利用するためのAPIを提供します。
 
@@ -81,7 +83,7 @@ app.post("/finishAuthentication", async (req, res) => {
 	});
 });
 ```
-FIDO2認証のみでなく、登録されているユーザーやクレデンシャルの管理などのAPIも準備されています。詳しくはAPIマニュアルをご参照ください。
+FIDO2認証のみでなく、登録されているユーザーやクレデンシャルの管理などのAPIも準備されています。詳しくは[APIリファレンス](api-reference.ja.md)をご参照ください。
 
 ## テストケース実行
 テストケースを実行するには、以下の環境プロパティを設定しておく必要があります。  
