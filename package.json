@@ -1,0 +1,89 @@
+{
+	"name": "yubion-fido2-server-sdk-js",
+	"version": "0.1.0",
+	"description": "This project is an SDK to use YubiOn FIDO2 Server Service from Node.js.",
+	"homepage": "https://github.com/YubiOn-Dev-Team/yubion-fido2-server-sdk-js",
+	"main": "dist/cjsindex.js",
+	"module": "dist/esm/index.js",
+	"types": "dist/cjs/index.d.ts",
+	"exports": {
+		".": {
+			"import": "./dist/esm/index.js",
+			"require": "./dist/cjs/index.js",
+			"types": "./dist/cjs/index.d.ts"
+		},
+		"./package.json": "./package.json"
+	},
+	"files": [
+		"dist"
+	],
+	"engines": {
+		"node": ">=18.0.0"
+	},
+	"scripts": {
+		"build:cjs": "tsc --project tsconfig.json",
+		"build:esm": "tsc --project tsconfig.esm.json",
+		"build": "npm run clean && npm run build:cjs && npm run build:esm",
+		"clean": "rimraf dist",
+		"prepublishOnly": "npm run build",
+		"test": "jest"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/YubiOn-Dev-Team/yubion-fido2-server-sdk-js.git"
+	},
+	"keywords": [
+		"Node.js",
+		"FIDO2",
+		"Passkey",
+		"YubiOn"
+	],
+	"author": {
+		"name": "SOFTGIKEN Co.,Ltd",
+		"email": "yubion-develop@sgk.jp",
+		"url": "https://www.sgk.co.jp"
+	},
+	"license": "MIT",
+	"jest": {
+		"moduleFileExtensions": [
+			"ts",
+			"js"
+		],
+		"transform": {
+			"^.+\\.ts$": [
+				"ts-jest",
+				{
+					"tsConfig": "tsconfig.json"
+				}
+			]
+		},
+		"testMatch": [
+			"**/test/*.test.ts"
+		],
+		"globalSetup": "<rootDir>/test/setupEnv.ts",
+		"maxWorkers": 1,
+		"testTimeout": 120000
+	},
+	"devDependencies": {
+		"@types/axios": "^0.9.36",
+		"@types/dotenv": "^6.1.1",
+		"@types/jest": "^29.5.14",
+		"@types/node": "^22.15.21",
+		"@types/set-cookie-parser": "^2.4.10",
+		"@types/yup": "^0.29.14",
+		"dotenv": "^17.0.1",
+		"jest": "^29.7.0",
+		"nid-webauthn-emulator": "^0.2.4",
+		"rimraf": "^6.0.1",
+		"ts-jest": "^29.3.4",
+		"typescript": "^5.8.3"
+	},
+	"dependencies": {
+		"axios": "^1.9.0",
+		"set-cookie-parser": "^2.7.1",
+		"yup": "^1.6.1"
+	},
+	"overrides": {
+		"glob": "^11.0.0" 
+	}
+}
