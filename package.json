@@ -82,5 +82,8 @@
 		"axios": "^1.9.0",
 		"set-cookie-parser": "^2.7.1",
 		"yup": "^1.6.1"
+	},
+	"overrides": {
+		"glob": "^11.0.0" 
 	}
 }
