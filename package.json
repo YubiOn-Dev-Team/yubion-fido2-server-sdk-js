@@ -1,19 +1,35 @@
 {
-	"name": "yubion-fido2-server-sdk",
-	"version": "1.0.0",
+	"name": "yubion-fido2-server-sdk-js",
+	"version": "0.1.0",
 	"description": "This project is an SDK to use YubiOn FIDO2 Server Service from Node.js.",
-	"main": "dist/index.js",
+	"homepage": "https://github.com/YubiOn-Dev-Team/yubion-fido2-server-sdk-js",
+	"main": "dist/cjsindex.js",
+	"module": "dist/esm/index.js",
+	"types": "dist/cjs/index.d.ts",
+	"exports": {
+		".": {
+			"import": "./dist/esm/index.js",
+			"require": "./dist/cjs/index.js",
+			"types": "./dist/cjs/index.d.ts"
+		},
+		"./package.json": "./package.json"
+	},
 	"files": [
 		"dist"
 	],
+	"engines": {
+		"node": ">=18.0.0"
+	},
 	"scripts": {
-		"build": "tsc",
+		"build:cjs": "tsc --project tsconfig.json",
+		"build:esm": "tsc --project tsconfig.esm.json",
+		"build": "npm run build:cjs && npm run build:esm",
 		"prepublishOnly": "npm run build",
 		"test": "jest"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git@gitlab.development.yubion.com:yubion/fido2serverfront/sdk/yubion-fido2-server-sdk-js.git"
+		"url": "https://github.com/YubiOn-Dev-Team/yubion-fido2-server-sdk-js.git"
 	},
 	"keywords": [
 		"Node.js",
@@ -21,7 +37,11 @@
 		"Passkey",
 		"YubiOn"
 	],
-	"author": "SOFTGIKEN Co.,Ltd",
+	"author": {
+		"name": "SOFTGIKEN Co.,Ltd",
+		"email": "yubion-develop@sgk.jp",
+		"url": "https://www.sgk.co.jp"
+	},
 	"license": "MIT",
 	"jest": {
 		"moduleFileExtensions": [
