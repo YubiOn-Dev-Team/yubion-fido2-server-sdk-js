@@ -10,7 +10,7 @@ Before use, you must already be registered as a customer with YubiOn FSS and hav
   
 Install the YubiOn FSS SDK in the Node.js project you will be using.
 ```
-npm install yubion-fido2-server-sdk-js
+npm install @yubion-dev-team/yubion-fido2-server-sdk-js
 ```
 Prepare a server-side API for registering and authenticating FIDO2 authenticators.
 ```
