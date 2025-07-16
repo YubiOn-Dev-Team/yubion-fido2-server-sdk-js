@@ -161,7 +161,7 @@ FIDO2サーバーとの通信を行うためのメインクラスです。
 
 *   `startRegisterParameter` (`Fido2StartRegisterParameter`): クレデンシャル登録開始のためのリクエストパラメータ。
     *   `creationOptionsBase` (`Fido2CreationOptionsBase`): WebAuthnの`PublicKeyCredentialCreationOptions`の基本部分。
-        *   `authenticatorSelection` (`AuthenticatorSelectionCriteria`, 省略可能): 認証器の選択基準。
+        *   `authenticatorSelection` (`AuthenticatorSelectionCriteria`, 省略可能): 認証器の選択基準。"platform", "cross-platform"のいずれかの文字列です。
         *   `timeout` (`number`, 省略可能): タイムアウト時間（ミリ秒）。
         *   `hints` (`string[]`, 省略可能): 認証方式をユーザーエージェント(ブラウザ等)に伝えるためのヒント。"security-key", "client-device", "hybrid"のいずれかの文字列の配列です。
         *   `attestation` (`AttestationConveyancePreference`, 省略可能): Attestationの要求設定。"none", "indirect", "direct", "enterprise"のいずれかの文字列です。
