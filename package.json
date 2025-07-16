@@ -1,6 +1,6 @@
 {
 	"name": "@yubion-dev-team/yubion-fido2-server-sdk-js",
-	"version": "0.1.0",
+	"version": "0.1.2",
 	"description": "This project is an SDK to use YubiOn FIDO2 Server Service from Node.js.",
 	"homepage": "https://github.com/YubiOn-Dev-Team/yubion-fido2-server-sdk-js",
 	"main": "dist/cjsindex.js",

@@ -19,7 +19,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          ref: ${{ github.event.repository.default_branch }}
+          # 修正: リリースされたタグのコードをチェックアウトする
+          ref: ${{ github.ref }}
 
       # Step 2: Set up a Node.js environment (Node 22.x) and configure npm to use the official registry
       # This ensures we have the right Node.js version and a proper registry URL for installs and publishing.
@@ -35,7 +36,7 @@ jobs:
         run: npm ci
 
       # Step 4: Build
-      - name: Install dependencies
+      - name: Build package
         run: npm run build
 
       # Step 5: Publish the new version to npm
