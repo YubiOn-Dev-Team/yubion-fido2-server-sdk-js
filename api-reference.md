@@ -161,7 +161,7 @@ Starts the credential registration process.
 
 *   `startRegisterParameter` (`Fido2StartRegisterParameter`): Request parameters for starting credential registration.
     *   `creationOptionsBase` (`Fido2CreationOptionsBase`): The base part of WebAuthn's `PublicKeyCredentialCreationOptions`.
-        *   `authenticatorSelection` (`AuthenticatorSelectionCriteria`, Optional): Criteria for selecting an authenticator.
+        *   `authenticatorSelection` (`AuthenticatorSelectionCriteria`, Optional): Criteria for selecting an authenticator. Can be "platform" or "cross-platform".
         *   `timeout` (`number`, Optional): Timeout period in milliseconds.
         *   `hints` (`string[]`, Optional): An array of strings to hint to the user agent (e.g., browser) about the authentication method. Can be "security-key", "client-device", or "hybrid".
         *   `attestation` (`AttestationConveyancePreference`, Optional): Attestation conveyance preference. Can be "none", "indirect", "direct", or "enterprise".
