@@ -1,0 +1,40 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Launch Full Stack",
+			"compounds": [
+				{
+					"name": "Launch Server",
+					"configurations": ["Launch Server Process"]
+				},
+				{
+					"name": "Launch Client",
+					"configurations": ["Launch Client Process"]
+				}
+			]
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Launch Server Process",
+			"runtimeExecutable": "npm",
+			"runtimeArgs": ["run", "dev"],
+			"cwd": "${workspaceFolder}/server",
+			"console": "integratedTerminal",
+			"serverReadyAction": {
+				"pattern": "Server is running on (.*)",
+				"uriFormat": "%s",
+				"action": "debugWithChrome"
+			}
+		},
+		{
+			"type": "chrome",
+			"request": "launch",
+			"name": "Launch Client Process",
+			"url": "http://localhost:5173",
+			"webRoot": "${workspaceFolder}/client/src",
+			"sourceMaps": true
+		}
+	]
+}
