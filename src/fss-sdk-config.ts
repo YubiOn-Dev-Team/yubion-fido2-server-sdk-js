@@ -18,7 +18,7 @@ export type FssSdkConfig = {
 }
 export function convertConfig(configBase : FssSdkConfigParameter) : FssSdkConfig {
 	return {
-		endpoint : configBase.endpoint ?? "https://fss.yubion.com/api/",
+		endpoint : configBase.endpoint ?? "https://fss-app.yubion.com/api/",
 		agent : configBase.agent ?? "yubion-fido2-server-sdk-js",
 		...configBase,
 	};
