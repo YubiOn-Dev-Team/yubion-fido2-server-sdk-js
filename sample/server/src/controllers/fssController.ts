@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 // Correctly import the SDK
-import { YubiOnFssSdk, Fido2StartRegisterParameter, Fido2FinishRegisterParameter, Fido2StartAuthenticateParameter, Fido2FinishAuthenticateParameter } from '@yubion-dev-team/yubion-fido2-server-sdk-js';
+import { YubiOnFssSdk, Fido2StartRegisterParameter, Fido2FinishRegisterParameter, Fido2StartAuthenticateParameter, Fido2FinishAuthenticateParameter, FssSdkConfigParameter } from '@yubion-dev-team/yubion-fido2-server-sdk-js';
 
 // Extend Express session to include user info and FSS session data
 declare module 'express-session' {
@@ -18,14 +18,17 @@ export class FssController {
 	private fss: YubiOnFssSdk;
 
 	constructor() {
-		// Instantiate the SDK correctly
-		this.fss = new YubiOnFssSdk({
-			endpoint : process.env.FSS_API_BASE_URL,
+		const config : FssSdkConfigParameter = {
 			rpId: process.env.FSS_RP_ID || '',
 			apiAuthId: process.env.FSS_API_KEY_ID || '',
 			secretKey: process.env.FSS_API_SECRET || '',
 			apiAuthType: "NonceSignAuth"
-		});
+		};
+		if(process.env.FSS_API_BASE_URL){
+			config.endpoint = process.env.FSS_API_BASE_URL;
+		}
+		// Instantiate the SDK correctly
+		this.fss = new YubiOnFssSdk(config);
 	}
 
 	private getUserId(name: string): string {

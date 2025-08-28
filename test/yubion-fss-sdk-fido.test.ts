@@ -38,6 +38,32 @@ const testUsers : Array<UserDataRegisterParameter> = [
 		disabled : true,
 	},
 ];
+const testDuplicatedUserNameUsers : Array<UserDataRegisterParameter> = [
+	//idx:0 base
+	{
+		userId : Buffer.from([...Array(64)].map((_, i) => i + 40)).toString("base64url"),
+		userName : "duplicated_username@example.com",
+		displayName : "duplicated_username",
+		userAttributes : { "attr1" : "duplicated_username" },
+		disabled : false,
+	},
+	//idx:1 different userId, but same userName
+	{
+		userId : Buffer.from([...Array(64)].map((_, i) => i + 41)).toString("base64url"),
+		userName : "duplicated_username@example.com",
+		displayName : "duplicated_username",
+		userAttributes : { "attr1" : "duplicated_username" },
+		disabled : false,
+	},
+	//idx:2 different userId, different userName (but at last, update same userName)
+	{
+		userId : Buffer.from([...Array(64)].map((_, i) => i + 42)).toString("base64url"),
+		userName : "duplicated_username_other@example.com",
+		displayName : "duplicated_username_other",
+		userAttributes : { "attr1" : "duplicated_username_other" },
+		disabled : false,
+	},
+];
 
 describe("YubiOnFssSdk fido test", () => {
 	beforeAll(async () => {
@@ -94,6 +120,60 @@ describe("YubiOnFssSdk fido test", () => {
 			
 			const user = await sdk.getUser(testUsers[0].userId);
 			expect(user.credentials).toHaveLength(1);
+			
+			//duplicated user name : register base user
+			const startBaseResponse = await sdk.startRegisterCredential({
+				creationOptionsBase:{},
+				user : testDuplicatedUserNameUsers[0],
+				options : {
+					createUserIfNotExists : true,
+				}
+			});
+			expect(startBaseResponse).not.toBeNull();
+
+			//duplicated user name : register different userId, but same userName
+			try {
+				await sdk.startRegisterCredential({
+					creationOptionsBase:{},
+					user : testDuplicatedUserNameUsers[1],
+					options : {
+						createUserIfNotExists : true,
+					}
+				});
+				expect(true).toBe(false);
+			} catch(ex : any){
+				expect(ex).toBeInstanceOf(FssApiError);
+				const e : FssApiError = ex;
+				expect(e.appStatus).toBe("DUPLICATED");
+			}
+
+			//duplicated user name : register different userId, different userName (but at last, update same userName)
+			const startUpdateResponse = await sdk.startRegisterCredential({
+				creationOptionsBase:{},
+				user : testDuplicatedUserNameUsers[2],
+				options : {
+					createUserIfNotExists : true,
+				}
+			});
+			expect(startUpdateResponse).not.toBeNull();
+			
+			try {
+				await sdk.startRegisterCredential({
+					creationOptionsBase:{},
+					user : {
+						...testDuplicatedUserNameUsers[2],
+						userName : testDuplicatedUserNameUsers[0].userName,
+					},
+					options : {
+						updateUserIfExists : true,
+					}
+				});
+				expect(true).toBe(false);
+			} catch(ex : any){
+				expect(ex).toBeInstanceOf(FssApiError);
+				const e : FssApiError = ex;
+				expect(e.appStatus).toBe("DUPLICATED");
+			}
 		}
 	});
 	test("authenticate", async () => {

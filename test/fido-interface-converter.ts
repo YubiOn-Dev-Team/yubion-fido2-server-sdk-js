@@ -20,7 +20,7 @@ export function convertCreationOptionsToBinary(creationOptionsJson : PublicKeyCr
 			type : x.type as "public-key",
 			transports : x.transports as AuthenticatorTransport[],
 		})),
-		extensions : creationOptionsJson.extensions,
+		extensions : creationOptionsJson.extensions as any,
 		timeout : creationOptionsJson.timeout,
 	};
 }
@@ -38,7 +38,7 @@ export function convertRequestOptionsToBinary(requestOptionsJson : PublicKeyCred
 		rpId : requestOptionsJson.rpId,
 		timeout : requestOptionsJson.timeout,
 		userVerification : requestOptionsJson.userVerification as UserVerificationRequirement | undefined,
-		extensions : requestOptionsJson.extensions,
+		extensions : requestOptionsJson.extensions as any,
 	};
 }
 /**
@@ -56,7 +56,7 @@ const arrayBufToBase64url = function(data : any) : any {
 	}
 
 	if (data instanceof ArrayBuffer || data instanceof Uint8Array) {
-		return base64UrlEncode(data);
+		return base64UrlEncode(data instanceof ArrayBuffer ? new Uint8Array(data) : data);
 	}
 
 	if (data instanceof Object) {
