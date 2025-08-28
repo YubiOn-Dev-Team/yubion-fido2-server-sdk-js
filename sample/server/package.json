@@ -13,7 +13,7 @@
 	"license": "ISC",
 	"description": "",
 	"dependencies": {
-		"@yubion-dev-team/yubion-fido2-server-sdk-js": "^0.1.3",
+		"@yubion-dev-team/yubion-fido2-server-sdk-js": "^0.1.5",
 		"body-parser": "^2.2.0",
 		"cors": "^2.8.5",
 		"dotenv": "^17.2.0",

@@ -41,10 +41,15 @@ export interface AuthInfo {
 	apiAuthType:FssApiAuthType,
 	secretKey:string,
 }
-export const sdkConfigBase = {
+export const sdkConfigBase = process.env.FSS_TEST_ENDPOINT ? 
+{
 	endpoint : process.env.FSS_TEST_ENDPOINT ?? undefined,
 	rpId : process.env.FSS_TEST_RP_ID,
-};
+} : 
+{
+	rpId : process.env.FSS_TEST_RP_ID,
+} 
+;
 export const sdkConfig_nonce_ok : AuthInfo = {
 	apiAuthId : process.env.FSS_TEST_NONCE_API_AUTH_ID,
 	apiAuthType : "NonceSignAuth",
@@ -77,8 +82,12 @@ export const sdkConfig_accesskey_ng : AuthInfo = {
 };
 export const sdkConfig = {...sdkConfigBase, ...sdkConfig_nonce_ok};
 
-export const sdkConfigBase_licenseTest = {
+export const sdkConfigBase_licenseTest = process.env.FSS_TEST_ENDPOINT ? 
+{
 	endpoint : process.env.FSS_TEST_ENDPOINT ?? undefined,
+	rpId : process.env.FSS_TEST_RP_ID_FOR_LICENSE_TEST,
+} :
+{
 	rpId : process.env.FSS_TEST_RP_ID_FOR_LICENSE_TEST,
 };
 export const sdkConfig_licenseTest : AuthInfo = {
